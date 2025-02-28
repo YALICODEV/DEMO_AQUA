@@ -1,0 +1,36 @@
+<div class="w-50 mx-auto mt-5">
+  <h2>Tareas</h2>
+
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <p *ngIf="tasks.length === 0 && !loading">No hay tareas</p>
+
+  <table *ngIf="tasks.length > 0 && !loading" class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Título</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>
+          <div class="d-flex gap-3">
+            <button (click)="deleteTask(task)" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover btn">Eliminar</button>
+            <label (click)="toggleTaskStatus(task)" class="d-flex gap-2 align-items-center pe-auto">
+              <input type="checkbox" [checked]="task.completed" />
+              Completado
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
